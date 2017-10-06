@@ -34,7 +34,7 @@ public class Main {
         methodToCall.getAlgorithm().apply(img);
 
         try {
-            File outFile = new File(filename + ".mod.png");
+            File outFile = new File(filename + "." + methodToCall.name() + ".png");
             if (!outFile.exists()) {
                 outFile.createNewFile();
             }

@@ -20,10 +20,10 @@ public class FloydSteinberg implements Algorithm {
                 //assuming R==G==B
                 int r = (pixel >> 16) & 0xff;
                 if (r + errors[row][col] < 128) {
-                    tmpError = r / 16;
+                    tmpError = (r + errors[row][col]) / 16;
                     image.setRGB(col, row, BLACK);
                 } else {
-                    tmpError = (r - 255) / 16;
+                    tmpError = (r + errors[row][col] - 255) / 16;
                     image.setRGB(col, row, WHITE);
                 }
                 //checking for OutOfBound
@@ -34,7 +34,9 @@ public class FloydSteinberg implements Algorithm {
                 if (row + 1 < h) {
                     if (col - 1 >= 0)
                         errors[row + 1][col - 1] += tmpError * (isLineOdd ? 3 : 1);
+
                     errors[row + 1][col] += tmpError * 5;
+
                     if (col + 1 < w)
                         errors[row + 1][col + 1] += tmpError * (isLineOdd ? 1 : 3);
                 }

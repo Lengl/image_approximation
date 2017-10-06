@@ -16,10 +16,10 @@ public class ErrorDiffusionLine implements Algorithm {
                 int r=(pixel>>16) & 0xff;
 
                 if (r + error < 128) {
-                    error = r;
+                    error += r;
                     image.setRGB(col, row, BLACK);
                 } else {
-                    error = r - 255;
+                    error = r + error - 255;
                     image.setRGB(col, row, WHITE);
                 }
             }
